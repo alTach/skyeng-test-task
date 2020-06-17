@@ -24,7 +24,6 @@ export class TabsService {
   private createActiveTab(activeTabTitle$: Observable<TabTitleComponent>, tabList$: Observable<TabComponent[]>) {
     return combineLatest<[TabTitleComponent, TabComponent[]]>([activeTabTitle$, tabList$]).pipe(
         map(([activeTabTitle, tabList]) => {
-          console.log(activeTabTitle, tabList)
           return  tabList.find(tab => tab.tabTitle === activeTabTitle) || tabList[0];
         }),
     )
