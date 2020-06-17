@@ -1,0 +1,7 @@
+<div class="tabs__titles">
+    <ng-container *ngFor="let tabTitleTemplate of tabTitleTemplates$ | async">
+        <ng-container *ngTemplateOutlet="tabTitleTemplate"></ng-container>
+    </ng-container>
+</div>
+
+<ng-container *ngTemplateOutlet="(activeTab$ | async)?.contentTemplate"></ng-container>
