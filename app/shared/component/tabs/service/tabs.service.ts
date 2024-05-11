@@ -7,7 +7,7 @@ import {map} from "rxjs/operators";
 @Injectable()
 export class TabsService {
   private tabList = new ReplaySubject<TabComponent[]>(1);
-  public tabList$ = new ReplaySubject<TabComponent[]>(1);
+  public tabList$ = this.tabList.asObservable();
   public activeTabTitle$ = new BehaviorSubject<TabTitleComponent>(null);
   public activeTab$ = this.createActiveTab(this.activeTabTitle$, this.tabList$);
 
