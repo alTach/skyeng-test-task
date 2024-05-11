@@ -6,22 +6,23 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class TabsService {
-  tabList$ = new ReplaySubject<TabComponent[]>(1);
-  activeTabTitle$ = new BehaviorSubject<TabTitleComponent>(null);
-  activeTab$ = this.createActiveTab(this.activeTabTitle$, this.tabList$);
+  private tabList = new ReplaySubject<TabComponent[]>(1);
+  public tabList$ = new ReplaySubject<TabComponent[]>(1);
+  public activeTabTitle$ = new BehaviorSubject<TabTitleComponent>(null);
+  public activeTab$ = this.createActiveTab(this.activeTabTitle$, this.tabList$);
 
   constructor() {
   }
 
-  updateTabList(tabList: Array<TabComponent>) {
-    this.tabList$.next(tabList);
+  public updateTabList(tabList: Array<TabComponent>) {
+    this.tabList.next(tabList);
   }
 
-  setActiveTab(tabTitle: TabTitleComponent) {
+  public setActiveTab(tabTitle: TabTitleComponent) {
     this.activeTabTitle$.next(tabTitle);
   }
 
-  private createActiveTab(activeTabTitle$: Observable<TabTitleComponent>, tabList$: Observable<TabComponent[]>) {
+  private createActiveTab(activeTabTitle$: Observable<TabTitleComponent>, tabList$: Observable<TabComponent[]>): Observable<TabComponent> {
     return combineLatest<[TabTitleComponent, TabComponent[]]>([activeTabTitle$, tabList$]).pipe(
         map(([activeTabTitle, tabList]) => {
           return  tabList.find(tab => tab.tabTitle === activeTabTitle) || tabList[0];
