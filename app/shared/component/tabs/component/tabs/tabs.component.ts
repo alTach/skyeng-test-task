@@ -12,13 +12,15 @@ import { DestroyService } from "../../service/destroy.service";
   styleUrls: ['./tabs.component.css'],
   providers: [DestroyService],
 })
-export class TabsComponent implements AfterContentInit {
+export class TabsComponent implements AfterContentInit, OnInit {
   public tabTitleTemplates$: Observable<TemplateRef<TabTitleComponent>[]>;
   public activeTab$: Observable<TabComponent>;
 
   @ContentChildren(TabComponent) tabList: QueryList<TabComponent>;
 
-  constructor(private tabsService: TabsService, public destroy$: DestroyService,) {
+  constructor(private tabsService: TabsService, public destroy$: DestroyService,) {}
+
+  public ngOnInit() {
     this.tabTitleTemplates$ = this.tabsService.tabList$.pipe(map(tabs => tabs.map(tab => tab.titleTemplate)));
     this.activeTab$ = this.tabsService.activeTab$;
   }

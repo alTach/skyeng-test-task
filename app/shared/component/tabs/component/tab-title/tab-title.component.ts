@@ -8,6 +8,9 @@ import { takeUntil } from "rxjs/operators";
   templateUrl: './tab-title.component.html',
   styleUrls: ['./tab-title.component.css'],
   providers: [DestroyService],
+  host: {
+    class: 'tabs__title'
+  }
 })
 export class TabTitleComponent implements OnInit {
 
@@ -22,8 +25,6 @@ export class TabTitleComponent implements OnInit {
       ) { }
 
   ngOnInit() {
-    this.renderer.addClass(this.elRef.nativeElement, 'tabs__title')
-
     this.tabsService.activeTab$.pipe(takeUntil(this.destroy$)).subscribe(activeTab => {
       this.toggleActiveClass(activeTab && activeTab.tabTitle === this);
     })
