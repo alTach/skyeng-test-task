@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'tab-content',
@@ -6,11 +6,4 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./tab-content.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabContentComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class TabContentComponent {}
